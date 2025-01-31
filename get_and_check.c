@@ -6,7 +6,7 @@
 /*   By: moaatik <moaatik@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/21 11:03:05 by moaatik           #+#    #+#             */
-/*   Updated: 2025/01/24 11:05:35 by moaatik          ###   ########.fr       */
+/*   Updated: 2025/01/29 19:12:39 by moaatik          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -57,10 +57,10 @@ int	check_duplicated_numbers_part_2(int strs_len, char **strs, int i, int j)
 
 int	check_duplicated_numbers(int argc, char **argv)
 {
-	int i;
-	int j;
-	char **strs;
-	int strs_len;
+	int		i;
+	int		j;
+	char	**strs;
+	int		strs_len;
 
 	j = 0;
 	i = 1;

@@ -1,4 +1,4 @@
-SRCS	= push_swap.c helper_functions.c ft_split.c swap_and_push.c rotate.c get_and_check.c reverse_rotate.c sort.c
+SRCS	= push_swap.c helper_functions.c helper_functions_part_two.c ft_split.c swap_and_push.c rotate.c get_and_check.c reverse_rotate.c sort.c sort_helper_functions.c
 OBJS	= $(SRCS:.c=.o)
 CC	= cc
 CFLAGS	= -Wall -Wextra -Werror
