@@ -6,7 +6,7 @@
 /*   By: moaatik <moaatik@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/21 11:03:05 by moaatik           #+#    #+#             */
-/*   Updated: 2025/01/29 19:12:39 by moaatik          ###   ########.fr       */
+/*   Updated: 2025/02/01 15:22:17 by moaatik          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -39,10 +39,12 @@ void	get(t_stack *a, int argc, char **argv)
 	free_strs(strs);
 }
 
-int	check_duplicated_numbers_part_2(int strs_len, char **strs, int i, int j)
+int	check_part_2(int strs_len, char **strs, int i, int j)
 {
 	while (i < strs_len)
 	{
+		if (ft_atoi(strs[i]) > 2147483647 || ft_atoi(strs[i]) < -2147483648)
+			return (1);
 		j = i + 1;
 		while (j < strs_len)
 		{
@@ -55,12 +57,13 @@ int	check_duplicated_numbers_part_2(int strs_len, char **strs, int i, int j)
 	return (0);
 }
 
-int	check_duplicated_numbers(int argc, char **argv)
+int	check_range_and_duplicated_numbers(int argc, char **argv)
 {
 	int		i;
 	int		j;
 	char	**strs;
 	int		strs_len;
+	int		retrun_value;
 
 	j = 0;
 	i = 1;
@@ -75,9 +78,30 @@ int	check_duplicated_numbers(int argc, char **argv)
 	}
 	else
 		strs = argv;
-	if (check_duplicated_numbers_part_2(strs_len, strs, i, j))
-		return (1);
+	retrun_value = check_part_2(strs_len, strs, i, j);
 	if (argc == 2)
 		free_strs(strs);
+	return (retrun_value);
+}
+
+int	already_sorted(t_stack *stack_a)
+{
+	t_node	*current;
+
+	current = stack_a->top;
+	while (current->next)
+	{
+		if (current->value > current->next->value)
+			return (1);
+		current = current->next;
+	}
 	return (0);
+}
+
+void	free_stacks(t_stack **stack_a, t_stack **stack_b)
+{
+	ft_lstclear((*stack_a)->top);
+	free(*stack_a);
+	ft_lstclear((*stack_b)->top);
+	free(*stack_b);
 }

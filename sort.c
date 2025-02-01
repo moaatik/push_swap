@@ -6,7 +6,7 @@
 /*   By: moaatik <moaatik@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/25 11:41:21 by moaatik           #+#    #+#             */
-/*   Updated: 2025/01/30 21:33:55 by moaatik          ###   ########.fr       */
+/*   Updated: 2025/02/01 15:20:17 by moaatik          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,6 +14,9 @@
 
 void	sort_three(t_stack *stack)
 {
+	if (stack->top->value > stack->top->next->value && \
+		stack->top->value > stack->bottom->value)
+		rotate_a(stack, 1);
 	if (stack->top->value > stack->top->next->value)
 		swap_a(stack, 1);
 	if (stack->top->next->value > stack->bottom->value)
