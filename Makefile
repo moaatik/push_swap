@@ -1,4 +1,4 @@
-SRCS	= push_swap.c helper_functions.c helper_functions_part_two.c ft_split.c swap_and_push.c rotate.c get_and_check.c reverse_rotate.c sort.c sort_helper_functions.c
+SRCS	= push_swap.c helper_functions.c helper_functions_part_two.c ft_split.c swap_and_push.c rotate.c get_and_check.c reverse_rotate.c sort.c sort_helper_functions.c sort_helper_functions_part_2.c
 BONUS_SRCS = checker_bonus.c ft_split.c swap_and_push.c rotate.c get_and_check.c reverse_rotate.c get_next_line_bonus.c get_next_line_utils_bonus.c helper_functions.c sort_helper_functions.c helper_functions_part_two.c 
 OBJS	= $(SRCS:.c=.o)
 BONUS_OBJS = $(BONUS_SRCS:.c=.o)

@@ -6,7 +6,7 @@
 /*   By: moaatik <moaatik@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/16 16:34:43 by moaatik           #+#    #+#             */
-/*   Updated: 2025/02/07 22:43:10 by moaatik          ###   ########.fr       */
+/*   Updated: 2025/02/08 16:59:34 by moaatik          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -40,9 +40,10 @@ typedef struct s_stack
 int		check_range_and_duplicated_numbers(int argc, char **argv);
 int		check_invalid_input(char **strs, int strs_len, int i);
 int		already_sorted(t_stack *stack_a);
+int		cost(int t_index, int c_index, t_stack *stack_a, t_stack *stack_b);
 void	sort_stack(t_stack *stack_a, t_stack *stack_b);
 void	sort_three(t_stack *stack);
-int		cost(int t_index, int c_index, t_stack *stack_a, t_stack *stack_b);
+void	push_to_stack_b(t_stack *stack_a, t_stack *stack_b);
 t_node	*get_smallest_value(t_stack *stack_a);
 void	get(t_stack *a, int argc, char **argv);
 char	**ft_split(char const *s, char c);

@@ -6,7 +6,7 @@
 /*   By: moaatik <moaatik@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/29 19:19:49 by moaatik           #+#    #+#             */
-/*   Updated: 2025/01/29 19:22:47 by moaatik          ###   ########.fr       */
+/*   Updated: 2025/02/08 16:58:06 by moaatik          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,21 +21,30 @@ t_node	*ft_lstlast(t_node *lst)
 	return (lst);
 }
 
-void	index_list(t_stack *stack)
+int	check_invalid_input(char **strs, int strs_len, int i)
 {
-	int		index;
-	t_node	*current;
+	int	j;
 
-	if (!stack || !stack->top)
-		return ;
-	current = stack->top;
-	index = 1;
-	while (current)
+	while (i < strs_len)
 	{
-		current->index = index;
-		index++;
-		current = current->next;
+		j = 0;
+		if (strs[i][j] == '\0')
+			return (1);
+		if (strs[i][j] == '+' || strs[i][j] == '-')
+		{
+			j++;
+			if (!strs[i][j])
+				return (1);
+		}
+		while (strs[i][j])
+		{
+			if (strs[i][j] < '0' || strs[i][j] > '9')
+				return (1);
+			j++;
+		}
+		i++;
 	}
+	return (0);
 }
 
 void	ft_lstadd_back(t_node **lst, t_node *new)

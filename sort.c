@@ -6,7 +6,7 @@
 /*   By: moaatik <moaatik@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/25 11:41:21 by moaatik           #+#    #+#             */
-/*   Updated: 2025/02/07 23:34:33 by moaatik          ###   ########.fr       */
+/*   Updated: 2025/02/08 16:55:24 by moaatik          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -118,8 +118,7 @@ void	sort_stack(t_stack *stack_a, t_stack *stack_b)
 {
 	t_node	*smallest;
 
-	while (stack_a->size > 5)
-		push_b(stack_a, stack_b, 1);
+	push_to_stack_b(stack_a, stack_b);
 	sort_five(stack_a, stack_b);
 	while (stack_b->top)
 	{
