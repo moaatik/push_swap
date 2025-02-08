@@ -6,7 +6,7 @@
 /*   By: moaatik <moaatik@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/24 10:19:04 by moaatik           #+#    #+#             */
-/*   Updated: 2025/01/29 19:26:08 by moaatik          ###   ########.fr       */
+/*   Updated: 2025/02/06 16:36:59 by moaatik          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -46,9 +46,10 @@ void	rotate_b(t_stack *stack_b, int print)
 		write(1, "rb\n", 3);
 }
 
-void	rotate_a_and_b(t_stack *stack_a, t_stack *stack_b)
+void	rotate_a_and_b(t_stack *stack_a, t_stack *stack_b, int print)
 {
 	rotate_a(stack_a, 0);
 	rotate_b(stack_b, 0);
-	write(1, "rr\n", 3);
+	if (print)
+		write(1, "rr\n", 3);
 }

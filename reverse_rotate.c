@@ -6,7 +6,7 @@
 /*   By: moaatik <moaatik@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/24 11:37:55 by moaatik           #+#    #+#             */
-/*   Updated: 2025/01/29 19:24:05 by moaatik          ###   ########.fr       */
+/*   Updated: 2025/02/06 16:38:26 by moaatik          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -40,9 +40,49 @@ void	reverse_rotate_b(t_stack *stack_b, int print)
 		write(1, "rrb\n", 4);
 }
 
-void	reverse_rotate_a_and_b(t_stack *stack_a, t_stack *stack_b)
+void	reverse_rotate_a_and_b(t_stack *stack_a, t_stack *stack_b, int print)
 {
 	reverse_rotate_a(stack_a, 0);
 	reverse_rotate_b(stack_b, 0);
-	write(1, "rrr\n", 4);
+	if (print)
+		write(1, "rrr\n", 4);
+}
+
+void	sort_three(t_stack *stack)
+{
+	if (stack->top->value > stack->top->next->value && \
+		stack->top->value > stack->bottom->value)
+		rotate_a(stack, 1);
+	if (stack->top->value > stack->top->next->value)
+		swap_a(stack, 1);
+	if (stack->top->next->value > stack->bottom->value)
+		reverse_rotate_a(stack, 1);
+	if (stack->top->value > stack->top->next->value)
+		swap_a(stack, 1);
+}
+
+int	check_invalid_input(char **strs, int strs_len, int i)
+{
+	int	j;
+
+	while (i < strs_len)
+	{
+		j = 0;
+		if (strs[i][j] == '\0')
+			return (1);
+		if (strs[i][j] == '+' || strs[i][j] == '-')
+		{
+			j++;
+			if (!strs[i][j])
+				return (1);
+		}
+		while (strs[i][j])
+		{
+			if (strs[i][j] < '0' || strs[i][j] > '9')
+				return (1);
+			j++;
+		}
+		i++;
+	}
+	return (0);
 }

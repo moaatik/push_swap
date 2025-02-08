@@ -6,7 +6,7 @@
 /*   By: moaatik <moaatik@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/30 19:53:05 by moaatik           #+#    #+#             */
-/*   Updated: 2025/01/31 15:33:24 by moaatik          ###   ########.fr       */
+/*   Updated: 2025/02/07 23:18:27 by moaatik          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -60,8 +60,12 @@ t_node	*get_smallest_value(t_stack *stack_a)
 	return (smallest);
 }
 
-void	manage_stack_size(t_stack *up, t_stack *down)
+void	manage_size_and_print(t_stack *up, t_stack *down, int print, char c)
 {
+	if (print && c == 'a')
+		write(1, "pa\n", 3);
+	else if (print && c == 'b')
+		write(1, "pb\n", 3);
 	up->size++;
 	down->size--;
 }

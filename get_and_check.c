@@ -6,7 +6,7 @@
 /*   By: moaatik <moaatik@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/21 11:03:05 by moaatik           #+#    #+#             */
-/*   Updated: 2025/02/01 15:22:17 by moaatik          ###   ########.fr       */
+/*   Updated: 2025/02/01 21:04:49 by moaatik          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -43,6 +43,10 @@ int	check_part_2(int strs_len, char **strs, int i, int j)
 {
 	while (i < strs_len)
 	{
+		if (strs[i][0] == 0)
+			return (1);
+		if (check_invalid_input(strs, strs_len, i))
+			return (1);
 		if (ft_atoi(strs[i]) > 2147483647 || ft_atoi(strs[i]) < -2147483648)
 			return (1);
 		j = i + 1;

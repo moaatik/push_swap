@@ -6,13 +6,13 @@
 /*   By: moaatik <moaatik@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/23 11:23:33 by moaatik           #+#    #+#             */
-/*   Updated: 2025/01/30 20:00:14 by moaatik          ###   ########.fr       */
+/*   Updated: 2025/02/06 17:47:43 by moaatik          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "push_swap.h"
 
-void	push_a(t_stack *stack_a, t_stack *stack_b)
+void	push_a(t_stack *stack_a, t_stack *stack_b, int print)
 {
 	if (stack_b->size <= 0)
 		return ;
@@ -37,11 +37,10 @@ void	push_a(t_stack *stack_a, t_stack *stack_b)
 	if (stack_a->bottom)
 		stack_b->bottom = ft_lstlast(stack_b->top);
 	stack_a->bottom = ft_lstlast(stack_a->top);
-	manage_stack_size(stack_a, stack_b);
-	write(1, "pa\n", 3);
+	manage_size_and_print(stack_a, stack_b, print, 'a');
 }
 
-void	push_b(t_stack *stack_a, t_stack *stack_b)
+void	push_b(t_stack *stack_a, t_stack *stack_b, int print)
 {
 	if (stack_a->size <= 0)
 		return ;
@@ -66,8 +65,7 @@ void	push_b(t_stack *stack_a, t_stack *stack_b)
 	if (stack_a->bottom)
 		stack_a->bottom = ft_lstlast(stack_a->top);
 	stack_b->bottom = ft_lstlast(stack_b->top);
-	manage_stack_size(stack_b, stack_a);
-	write(1, "pb\n", 3);
+	manage_size_and_print(stack_b, stack_a, print, 'b');
 }
 
 void	swap_a(t_stack *stack_a, int print)
@@ -108,9 +106,10 @@ void	swap_b(t_stack *stack_b, int print)
 		write(1, "sb\n", 3);
 }
 
-void	swap_a_and_b(t_stack *stack_a, t_stack *stack_b)
+void	swap_a_and_b(t_stack *stack_a, t_stack *stack_b, int print)
 {
 	swap_a(stack_a, 0);
 	swap_b(stack_b, 0);
-	write(1, "ss\n", 3);
+	if (print)
+		write(1, "ss\n", 3);
 }

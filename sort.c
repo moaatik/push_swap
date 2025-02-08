@@ -6,23 +6,34 @@
 /*   By: moaatik <moaatik@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/25 11:41:21 by moaatik           #+#    #+#             */
-/*   Updated: 2025/02/01 15:20:17 by moaatik          ###   ########.fr       */
+/*   Updated: 2025/02/07 23:34:33 by moaatik          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "push_swap.h"
 
-void	sort_three(t_stack *stack)
+void	sort_five(t_stack *stack_a, t_stack *stack_b)
 {
-	if (stack->top->value > stack->top->next->value && \
-		stack->top->value > stack->bottom->value)
-		rotate_a(stack, 1);
-	if (stack->top->value > stack->top->next->value)
-		swap_a(stack, 1);
-	if (stack->top->next->value > stack->bottom->value)
-		reverse_rotate_a(stack, 1);
-	if (stack->top->value > stack->top->next->value)
-		swap_a(stack, 1);
+	t_node	*smallest;
+
+	if (stack_a->size <= 3)
+		return (sort_three(stack_a));
+	while (stack_a->size > 3)
+	{
+		smallest = get_smallest_value(stack_a);
+		while (stack_a->top != smallest)
+		{
+			index_list(stack_a);
+			if (smallest->index > stack_a->size / 2)
+				reverse_rotate_a(stack_a, 1);
+			else
+				rotate_a(stack_a, 1);
+		}
+		push_b(stack_a, stack_b, 1);
+	}
+	sort_three(stack_a);
+	push_a(stack_a, stack_b, 1);
+	push_a(stack_a, stack_b, 1);
 }
 
 void	find_target(t_stack *stack_a, t_stack *stack_b)
@@ -59,10 +70,10 @@ void	move_to_stack_a(t_node *to_a_node, t_stack *stack_a, t_stack *stack_b)
 		index_list(stack_b);
 		if ((target->index <= stack_a->size / 2 && stack_a->top != target) && \
 		(to_a_node->index <= stack_b->size / 2 && stack_b->top != to_a_node))
-			rotate_a_and_b(stack_a, stack_b);
+			rotate_a_and_b(stack_a, stack_b, 1);
 		else if ((target->index > stack_a->size / 2 && \
 		to_a_node->index > stack_b->size / 2))
-			reverse_rotate_a_and_b(stack_a, stack_b);
+			reverse_rotate_a_and_b(stack_a, stack_b, 1);
 		else if (target->index <= stack_a->size / 2 && stack_a->top != target)
 			rotate_a(stack_a, 1);
 		else if (to_a_node->index <= stack_b->size / 2 && \
@@ -73,7 +84,7 @@ void	move_to_stack_a(t_node *to_a_node, t_stack *stack_a, t_stack *stack_b)
 		else if (to_a_node->index > stack_b->size / 2)
 			reverse_rotate_b(stack_b, 1);
 	}
-	push_a(stack_a, stack_b);
+	push_a(stack_a, stack_b, 1);
 }
 
 t_node	*find_min_cost_node(t_stack *stack_a, t_stack *stack_b)
@@ -107,9 +118,9 @@ void	sort_stack(t_stack *stack_a, t_stack *stack_b)
 {
 	t_node	*smallest;
 
-	while (stack_a->size > 3)
-		push_b(stack_a, stack_b);
-	sort_three(stack_a);
+	while (stack_a->size > 5)
+		push_b(stack_a, stack_b, 1);
+	sort_five(stack_a, stack_b);
 	while (stack_b->top)
 	{
 		index_list(stack_a);
