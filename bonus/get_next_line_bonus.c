@@ -6,11 +6,11 @@
 /*   By: moaatik <moaatik@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/17 12:55:53 by moaatik           #+#    #+#             */
-/*   Updated: 2025/02/06 17:05:39 by moaatik          ###   ########.fr       */
+/*   Updated: 2025/02/12 16:44:58 by moaatik          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "push_swap.h"
+#include "checker_bonus.h"
 
 static char	*remove_content(char *str, char *line)
 {

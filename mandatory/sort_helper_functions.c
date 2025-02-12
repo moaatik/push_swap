@@ -6,20 +6,20 @@
 /*   By: moaatik <moaatik@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/30 19:53:05 by moaatik           #+#    #+#             */
-/*   Updated: 2025/02/07 23:18:27 by moaatik          ###   ########.fr       */
+/*   Updated: 2025/02/09 16:49:28 by moaatik          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "push_swap.h"
 
-int	get_max(int a, int b)
+int	get_total_moves(int a, int b)
 {
 	if (a > b)
 		return (a);
 	return (b);
 }
 
-int	get_min(int a, int b)
+int	get_minimum_moves(int a, int b)
 {
 	if (a < b)
 		return (a);
@@ -38,10 +38,11 @@ int	cost(int t_index, int c_index, t_stack *stack_a, t_stack *stack_b)
 	reverse_rotate_a = stack_a->size - t_index;
 	reverse_rotate_b = stack_b->size - c_index;
 	if (c_index <= stack_b->size / 2 && t_index <= stack_a->size / 2)
-		return (get_max(rotate_a, rotate_b));
+		return (get_total_moves(rotate_a, rotate_b));
 	if (c_index > stack_b->size / 2 && t_index > stack_a->size / 2)
-		return (get_max(reverse_rotate_a, reverse_rotate_b));
-	return (get_min(rotate_a + reverse_rotate_b, reverse_rotate_a + rotate_b));
+		return (get_total_moves(reverse_rotate_a, reverse_rotate_b));
+	return (get_minimum_moves(rotate_a + reverse_rotate_b, \
+		reverse_rotate_a + rotate_b));
 }
 
 t_node	*get_smallest_value(t_stack *stack_a)

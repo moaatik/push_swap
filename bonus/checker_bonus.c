@@ -6,11 +6,11 @@
 /*   By: moaatik <moaatik@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/06 14:06:17 by moaatik           #+#    #+#             */
-/*   Updated: 2025/02/07 19:38:08 by moaatik          ###   ########.fr       */
+/*   Updated: 2025/02/12 16:44:36 by moaatik          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "push_swap.h"
+#include "checker_bonus.h"
 
 int	ft_strcmp(const char *s1, const char *s2)
 {
@@ -85,13 +85,24 @@ int	main(int argc, char **argv)
 	t_stack	*stack_a;
 	t_stack	*stack_b;
 
-	stack_a = ft_stacknew();
-	stack_b = ft_stacknew();
 	if (argc < 2)
 		return (0);
 	if (argv[1][0] == 0 || check_range_and_duplicated_numbers(argc, argv))
 		ft_error();
-	get(stack_a, argc, argv);
+	stack_a = ft_stacknew();
+	stack_b = ft_stacknew();
+	if (!stack_a || !stack_b)
+	{
+		free(stack_a);
+		free(stack_b);
+		ft_error();
+	}
+	get(stack_a, argc, argv, stack_b);
+	if (check_duplicate_in_stack(stack_a))
+	{
+		free_stacks(&stack_a, &stack_b);
+		ft_error();
+	}
 	checker_sort_stack(stack_a, stack_b);
 	free_stacks(&stack_a, &stack_b);
 	return (0);

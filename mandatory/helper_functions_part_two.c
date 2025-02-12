@@ -6,7 +6,7 @@
 /*   By: moaatik <moaatik@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/29 19:19:49 by moaatik           #+#    #+#             */
-/*   Updated: 2025/02/08 16:58:06 by moaatik          ###   ########.fr       */
+/*   Updated: 2025/02/11 16:30:45 by moaatik          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -38,7 +38,7 @@ int	check_invalid_input(char **strs, int strs_len, int i)
 		}
 		while (strs[i][j])
 		{
-			if (strs[i][j] < '0' || strs[i][j] > '9')
+			if ((strs[i][j] < '0' || strs[i][j] > '9') && strs[i][j] != ' ')
 				return (1);
 			j++;
 		}
@@ -76,13 +76,17 @@ t_stack	*ft_stacknew(void)
 	return (new_stack);
 }
 
-t_node	*ft_lstnew(int value)
+t_node	*ft_lstnew(int value, t_stack *a, t_stack *b, char **strs)
 {
 	t_node	*new_list;
 
 	new_list = malloc(sizeof(t_node));
 	if (!new_list)
-		return (NULL);
+	{
+		free_strs(strs);
+		free_stacks(&a, &b);
+		ft_error();
+	}
 	new_list->value = value;
 	new_list->next = NULL;
 	new_list->prev = NULL;
