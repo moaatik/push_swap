@@ -6,36 +6,34 @@
 /*   By: moaatik <moaatik@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/21 11:03:05 by moaatik           #+#    #+#             */
-/*   Updated: 2025/02/11 16:29:53 by moaatik          ###   ########.fr       */
+/*   Updated: 2025/02/14 17:01:07 by moaatik          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "push_swap.h"
 
-void	get(t_stack *a, int argc, char **argv, t_stack *b)
+int	get(t_stack *a, int argc, char **argv, t_stack *b)
 {
 	int		i;
 	int		j;
 	char	**strs;
-	t_node	*node;
 
 	j = 1;
 	strs = NULL;
-	node = NULL;
 	while (j < argc)
 	{
 		strs = ft_split(argv[j], ' ');
 		if (!strs)
-			ft_error();
+			return (1);
 		i = 0;
 		while (strs[i])
-			ft_lstadd_back(&node, ft_lstnew(ft_atoi(strs[i++]), a, b, strs));
+			ft_lstadd_back(&a->top, ft_lstnew(ft_atoi(strs[i++]), a, b, strs));
 		free_strs(strs);
 		j++;
 	}
-	a->top = node;
-	a->size = ft_lstsize(node);
-	a->bottom = ft_lstlast(node);
+	a->size = ft_lstsize(a->top);
+	a->bottom = ft_lstlast(a->top);
+	return (0);
 }
 
 int	check_part_2(int strs_len, char **strs)
@@ -74,6 +72,8 @@ int	check_range_and_duplicated_numbers(int argc, char **argv)
 	j = 1;
 	while (j < argc)
 	{
+		if (argv[j][0] == 0)
+			return (1);
 		strs = ft_split(argv[j], ' ');
 		if (!strs)
 			ft_error();

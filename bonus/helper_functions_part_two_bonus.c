@@ -6,7 +6,7 @@
 /*   By: moaatik <moaatik@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/29 19:19:49 by moaatik           #+#    #+#             */
-/*   Updated: 2025/02/12 18:24:45 by moaatik          ###   ########.fr       */
+/*   Updated: 2025/02/14 19:21:41 by moaatik          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -46,4 +46,33 @@ void	manage_size_and_print(t_stack *up, t_stack *down, int print, char c)
 		write(1, "pb\n", 3);
 	up->size++;
 	down->size--;
+}
+
+int	check_instruction(char *str)
+{
+	if (!(ft_strcmp(str, "sa\n")))
+		return (0);
+	else if (!(ft_strcmp(str, "sb\n")))
+		return (0);
+	else if (!(ft_strcmp(str, "ss\n")))
+		return (0);
+	else if (!(ft_strcmp(str, "pa\n")))
+		return (0);
+	else if (!(ft_strcmp(str, "pb\n")))
+		return (0);
+	else if (!(ft_strcmp(str, "ra\n")))
+		return (0);
+	else if (!(ft_strcmp(str, "rb\n")))
+		return (0);
+	else if (!(ft_strcmp(str, "rr\n")))
+		return (0);
+	else if (!(ft_strcmp(str, "rra\n")))
+		return (0);
+	else if (!(ft_strcmp(str, "rrb\n")))
+		return (0);
+	else if (!(ft_strcmp(str, "rrr\n")))
+		return (0);
+	else
+		return (1);
+	return (0);
 }

@@ -6,7 +6,7 @@
 /*   By: moaatik <moaatik@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/08 16:55:10 by moaatik           #+#    #+#             */
-/*   Updated: 2025/02/08 16:58:58 by moaatik          ###   ########.fr       */
+/*   Updated: 2025/02/12 20:51:55 by moaatik          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,17 +36,20 @@ void	sort_array(int *values, int size)
 	}
 }
 
-int	find_median(t_stack *stack)
+int	find_median(t_stack *stack_a, t_stack *stack_b)
 {
 	int		*values;
 	int		median;
 	int		i;
 	t_node	*current;
 
-	values = malloc(stack->size * sizeof(int));
+	values = malloc(stack_a->size * sizeof(int));
 	if (!values)
-		return (0);
-	current = stack->top;
+	{
+		free_stacks(&stack_a, &stack_b);
+		ft_error();
+	}
+	current = stack_a->top;
 	i = 0;
 	while (current)
 	{
@@ -54,8 +57,8 @@ int	find_median(t_stack *stack)
 		current = current->next;
 		i++;
 	}
-	sort_array(values, stack->size);
-	median = values[stack->size / 2];
+	sort_array(values, stack_a->size);
+	median = values[stack_a->size / 2];
 	free(values);
 	return (median);
 }
@@ -64,7 +67,7 @@ void	push_to_stack_b(t_stack *stack_a, t_stack *stack_b)
 {
 	int	median;
 
-	median = find_median(stack_a);
+	median = find_median(stack_a, stack_b);
 	while (stack_a->size > 5)
 	{
 		push_b(stack_a, stack_b, 1);

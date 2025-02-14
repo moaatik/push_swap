@@ -6,7 +6,7 @@
 /*   By: moaatik <moaatik@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/24 11:37:55 by moaatik           #+#    #+#             */
-/*   Updated: 2025/02/12 16:54:53 by moaatik          ###   ########.fr       */
+/*   Updated: 2025/02/14 19:35:38 by moaatik          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -46,4 +46,17 @@ void	reverse_rotate_a_and_b(t_stack *stack_a, t_stack *stack_b, int print)
 	reverse_rotate_b(stack_b, 0);
 	if (print)
 		write(1, "rrr\n", 4);
+}
+
+void	free_instructions(t_instruction *instructions)
+{
+	t_instruction	*tmp;
+
+	while (instructions)
+	{
+		tmp = instructions->next;
+		free(instructions->instruction);
+		free(instructions);
+		instructions = tmp;
+	}
 }

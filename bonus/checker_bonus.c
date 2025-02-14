@@ -6,7 +6,7 @@
 /*   By: moaatik <moaatik@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/06 14:06:17 by moaatik           #+#    #+#             */
-/*   Updated: 2025/02/12 16:44:36 by moaatik          ###   ########.fr       */
+/*   Updated: 2025/02/14 19:27:11 by moaatik          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,7 +26,7 @@ int	ft_strcmp(const char *s1, const char *s2)
 	return (0);
 }
 
-int	check_move(char *str, t_stack *stack_a, t_stack *stack_b)
+int	move(char *str, t_stack *stack_a, t_stack *stack_b)
 {
 	if (!(ft_strcmp(str, "sa\n")))
 		swap_a(stack_a, 0);
@@ -55,24 +55,48 @@ int	check_move(char *str, t_stack *stack_a, t_stack *stack_b)
 	return (0);
 }
 
-void	checker_sort_stack(t_stack *stack_a, t_stack *stack_b)
+t_instruction	*get_instruction(t_stack *stack_a, t_stack *stack_b)
 {
-	char	*str;
-	int		original_size;
+	char			*str;
+	t_instruction	*instruction;
 
-	original_size = stack_a->size;
 	str = get_next_line(0);
+	instruction = NULL;
 	while (str)
 	{
-		if (check_move(str, stack_a, stack_b))
+		if (check_instruction(str))
 		{
-			free(str);
-			write(2, "Error\n", 6);
-			return ;
+			free_stacks(&stack_a, &stack_b);
+			free_instructions(instruction);
+			ft_error();
 		}
-		free(str);
+		ft_lstadd_back_instruction(&instruction, \
+			ft_lstnew_instruction(str, stack_a, stack_b, instruction));
 		str = get_next_line(0);
 	}
+	return (instruction);
+}
+
+void	checker_sort_stack(t_stack *stack_a, t_stack *stack_b)
+{
+	t_instruction	*instructions;
+	t_instruction	*instruction;
+	int				original_size;
+
+	original_size = stack_a->size;
+	instructions = get_instruction(stack_a, stack_b);
+	instruction = instructions;
+	while (instruction)
+	{
+		if (move(instruction->instruction, stack_a, stack_b))
+		{
+			free_stacks(&stack_a, &stack_b);
+			free_instructions(instructions);
+			ft_error();
+		}
+		instruction = instruction->next;
+	}
+	free_instructions(instructions);
 	if (!already_sorted(stack_a) && stack_b->size == 0 && \
 		stack_a->size == original_size)
 		write(1, "OK\n", 3);
@@ -87,18 +111,12 @@ int	main(int argc, char **argv)
 
 	if (argc < 2)
 		return (0);
-	if (argv[1][0] == 0 || check_range_and_duplicated_numbers(argc, argv))
+	if (check_range_and_duplicated_numbers(argc, argv))
 		ft_error();
 	stack_a = ft_stacknew();
 	stack_b = ft_stacknew();
-	if (!stack_a || !stack_b)
-	{
-		free(stack_a);
-		free(stack_b);
-		ft_error();
-	}
-	get(stack_a, argc, argv, stack_b);
-	if (check_duplicate_in_stack(stack_a))
+	if (!stack_a || !stack_b || get(stack_a, argc, argv, stack_b) \
+		|| check_duplicate_in_stack(stack_a))
 	{
 		free_stacks(&stack_a, &stack_b);
 		ft_error();

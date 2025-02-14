@@ -6,7 +6,7 @@
 /*   By: moaatik <moaatik@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/16 16:34:43 by moaatik           #+#    #+#             */
-/*   Updated: 2025/02/12 17:22:14 by moaatik          ###   ########.fr       */
+/*   Updated: 2025/02/14 17:01:43 by moaatik          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,10 +15,6 @@
 
 # include <stdlib.h>
 # include <unistd.h>
-
-# ifndef BUFFER_SIZE
-#  define BUFFER_SIZE 1
-# endif
 
 typedef struct s_node
 {
@@ -45,7 +41,7 @@ void	sort_stack(t_stack *stack_a, t_stack *stack_b);
 void	sort_three(t_stack *stack);
 void	push_to_stack_b(t_stack *stack_a, t_stack *stack_b);
 t_node	*get_smallest_value(t_stack *stack_a);
-void	get(t_stack *a, int argc, char **argv, t_stack *b);
+int		get(t_stack *a, int argc, char **argv, t_stack *b);
 char	**ft_split(char const *s, char c);
 long	ft_atoi(const char *str);
 t_stack	*ft_stacknew(void);
