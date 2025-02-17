@@ -6,7 +6,7 @@
 /*   By: moaatik <moaatik@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/21 11:03:05 by moaatik           #+#    #+#             */
-/*   Updated: 2025/02/14 17:12:25 by moaatik          ###   ########.fr       */
+/*   Updated: 2025/02/17 19:19:19 by moaatik          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -67,24 +67,24 @@ int	check_range_and_duplicated_numbers(int argc, char **argv)
 {
 	int		j;
 	char	**strs;
-	int		strs_len;
+	int		len;
 
 	j = 1;
 	while (j < argc)
 	{
-		if (argv[j][0] == 0)
+		len = 0;
+		while (argv[j][len] == 32)
+			len++;
+		if (argv[j][len] == 0)
 			return (1);
 		strs = ft_split(argv[j], ' ');
 		if (!strs)
 			ft_error();
-		strs_len = 0;
-		while (strs[strs_len])
-			strs_len++;
-		if (check_part_2(strs_len, strs))
-		{
-			free_strs(strs);
-			return (1);
-		}
+		len = 0;
+		while (strs[len])
+			len++;
+		if (check_part_2(len, strs))
+			return (free_strs(strs), 1);
 		free_strs(strs);
 		j++;
 	}
